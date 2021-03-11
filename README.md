@@ -86,6 +86,11 @@ We have verified under PyTorch 1.4.0 and torchvision 0.5.0. For example:
 pip install torch==1.4.0 torchvision==0.5.0
 ```
 
+torch 1.8 and CUDA 11.1
+```bash
+pip install torch==1.8.0+cu111 torchvision==0.9.0+cu111 torchaudio==0.8.0 -f https://download.pytorch.org/whl/torch_stable.html
+```
+
 **3. Pytorch Geometric:**
 Install [PyTorch Geometric](https://pytorch-geometric.readthedocs.io/en/latest/notes/installation.html), 
 follow their instructions. For example:
@@ -98,6 +103,15 @@ pip install torch-scatter==latest+${CUDA} -f https://pytorch-geometric.com/whl/t
 pip install torch-sparse==latest+${CUDA} -f https://pytorch-geometric.com/whl/torch-${TORCH}.html
 pip install torch-cluster==latest+${CUDA} -f https://pytorch-geometric.com/whl/torch-${TORCH}.html
 pip install torch-spline-conv==latest+${CUDA} -f https://pytorch-geometric.com/whl/torch-${TORCH}.html
+pip install torch-geometric
+```
+
+For PyTorch 1.8.0 and CUDA 11.1, type:
+```bash
+pip install torch-scatter -f https://pytorch-geometric.com/whl/torch-1.8.0+cu111.html
+pip install torch-sparse -f https://pytorch-geometric.com/whl/torch-1.8.0+cu111.html
+pip install torch-cluster -f https://pytorch-geometric.com/whl/torch-1.8.0+cu111.html
+pip install torch-spline-conv -f https://pytorch-geometric.com/whl/torch-1.8.0+cu111.html
 pip install torch-geometric
 ```
 
