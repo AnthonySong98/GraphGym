@@ -1,0 +1,13 @@
+language: ruby
+
+services:
+  - docker
+
+before_install:
+  - docker build -t graphgym .
+  - docker run -d -p 127.0.0.1:80:4567 graphgym /bin/sh -c "cd /root/GraphGym; bundle exec foreman start;"
+  - docker ps -a
+  - docker run graphgym /bin/sh -c "cd /root/GraphGym; bundle exec rake test"
+
+script:
+  - bundle exec rake test
