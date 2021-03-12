@@ -43,18 +43,18 @@ RUN curl -O https://bootstrap.pypa.io/get-pip.py && \
     rm get-pip.py
 
 # Install PyTorch
-RUN pip install torch==${PYTORCH_VERSION}+${CUDA_VERSION} torchvision==0.9.0+${CUDA_VERSION} torchaudio==0.8.0 -f https://download.pytorch.org/whl/torch_stable.html
+RUN pip install -q torch==${PYTORCH_VERSION}+${CUDA_VERSION} torchvision==0.9.0+${CUDA_VERSION} torchaudio==0.8.0 -f https://download.pytorch.org/whl/torch_stable.html
 
 # Install torch-geometric
-RUN pip install torch-scatter -f https://pytorch-geometric.com/whl/torch-${PYTORCH_VERSION}+${CUDA_VERSION}.html && \
-    pip install torch-sparse -f https://pytorch-geometric.com/whl/torch-${PYTORCH_VERSION}+${CUDA_VERSION}.html && \
-    pip install torch-cluster -f https://pytorch-geometric.com/whl/torch-${PYTORCH_VERSION}+${CUDA_VERSION}.html && \
-    pip install torch-spline-conv -f https://pytorch-geometric.com/whl/torch-${PYTORCH_VERSION}+${CUDA_VERSION}.html && \
-    pip install torch-geometric
+RUN pip install -q torch-scatter -f https://pytorch-geometric.com/whl/torch-${PYTORCH_VERSION}+${CUDA_VERSION}.html && \
+    pip install -q torch-sparse -f https://pytorch-geometric.com/whl/torch-${PYTORCH_VERSION}+${CUDA_VERSION}.html && \
+    pip install -q torch-cluster -f https://pytorch-geometric.com/whl/torch-${PYTORCH_VERSION}+${CUDA_VERSION}.html && \
+    pip install -q torch-spline-conv -f https://pytorch-geometric.com/whl/torch-${PYTORCH_VERSION}+${CUDA_VERSION}.html && \
+    pip install -q torch-geometric
 
 COPY . .
 
-RUN pip install -r requirements.txt
+RUN pip install -q -r requirements.txt
 
 # Build
 RUN python setup.py develop

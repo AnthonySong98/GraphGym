@@ -8,20 +8,22 @@ env:
   jobs:
     - TORCH_VERSION=1.8.0 TORCHVISION_VERSION=0.9.0 PYTHON_VERSION=3.8 IDX=cpu
     - TORCH_VERSION=1.8.0 TORCHVISION_VERSION=0.9.0 PYTHON_VERSION=3.8 IDX=cu111
+    - TORCH_VERSION=1.8.0 TORCHVISION_VERSION=0.9.0 PYTHON_VERSION=3.8 IDX=cu102
     - TORCH_VERSION=1.7.0 TORCHVISION_VERSION=0.8.1 PYTHON_VERSION=3.7 IDX=cpu
-    - TORCH_VERSION=1.7.0 TORCHVISION_VERSION=0.8.0 PYTHON_VERSION=3.8 IDX=cu101
+    - TORCH_VERSION=1.7.0 TORCHVISION_VERSION=0.8.0 PYTHON_VERSION=3.7 IDX=cu110
+    - TORCH_VERSION=1.7.0 TORCHVISION_VERSION=0.8.0 PYTHON_VERSION=3.6 IDX=cu101
 
 install:
   - source ./.travis/install.sh
   - conda create --yes -n test python="${PYTHON_VERSION}"
   - source activate test
-  - pip install torch==${TORCH_VERSION}+${IDX} torchvision==${TORCHVISION_VERSION}+${IDX} torchaudio==0.8.0 -f https://download.pytorch.org/whl/torch_stable.html
-  - pip install torch-scatter -f https://pytorch-geometric.com/whl/torch-${TORCH_VERSION}+${IDX}.html
-  - pip install torch-sparse -f https://pytorch-geometric.com/whl/torch-${TORCH_VERSION}+${IDX}.html
-  - pip install torch-cluster -f https://pytorch-geometric.com/whl/torch-${TORCH_VERSION}+${IDX}.html
-  - pip install torch-spline-conv -f https://pytorch-geometric.com/whl/torch-${TORCH_VERSION}+${IDX}.html
-  - pip install torch-geometric
-  - pip install -r requirements.txt
+  - pip install -q torch==${TORCH_VERSION}+${IDX} torchvision==${TORCHVISION_VERSION}+${IDX} torchaudio==0.8.0 -f https://download.pytorch.org/whl/torch_stable.html
+  - pip install -q torch-scatter -f https://pytorch-geometric.com/whl/torch-${TORCH_VERSION}+${IDX}.html
+  - pip install -q torch-sparse -f https://pytorch-geometric.com/whl/torch-${TORCH_VERSION}+${IDX}.html
+  - pip install -q torch-cluster -f https://pytorch-geometric.com/whl/torch-${TORCH_VERSION}+${IDX}.html
+  - pip install -q torch-spline-conv -f https://pytorch-geometric.com/whl/torch-${TORCH_VERSION}+${IDX}.html
+  - pip install -q torch-geometric
+  - pip install -q -r requirements.txt
 
 script: python setup.py develop
 notifications:
