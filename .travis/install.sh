@@ -33,13 +33,10 @@ fi
 if [ $TRAVIS_OS_NAME = 'windows' ]; then
     # Install some custom requirements on windows
     case "${IDX}" in
-        cu102 | cu111)
+        cu102 | cu111 | cpu)
             pip install -q torch==${TORCH_VERSION}+${IDX} torchvision==${TORCHVISION_VERSION}+${IDX} torchaudio==0.8.0 -f https://download.pytorch.org/whl/torch_stable.html
             ;;
-
-        cpu)
-            pip install -q torch==${TORCH_VERSION}+${IDX} torchvision==${TORCHVISION_VERSION}+${IDX} torchaudio==0.7.0 -f https://download.pytorch.org/whl/torch_stable.html
-            ;;
+            
         *)
             # may fail
             pip install -q torch==${TORCH_VERSION}+${IDX} torchvision==${TORCHVISION_VERSION}+${IDX} torchaudio==0.7.0 -f https://download.pytorch.org/whl/torch_stable.html
