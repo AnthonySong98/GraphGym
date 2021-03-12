@@ -1,40 +1,45 @@
 #!/bin/bash
-# reference from https://github.com/rusty1s/pytorch_geometric/blob/master/script/conda.sh
 
-if [ "${TRAVIS_OS_NAME}" = "linux" ]; then
-  wget -nv https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh
-  chmod +x miniconda.sh
-  ./miniconda.sh -b
-  PATH=/home/travis/miniconda3/bin:${PATH}
+if [ $TRAVIS_OS_NAME = 'osx' ]; then
+
+    # Install some custom requirements on macOS
+    # e.g. brew install pyenv-virtualenv
+
+    case "${IDX}" in
+        cpu)
+            pip -q install torch torchvision torchaudio
+            ;;
+    esac
 fi
 
-if [ "${TRAVIS_OS_NAME}" = "osx" ]; then
-  wget -nv https://repo.anaconda.com/miniconda/Miniconda3-latest-MacOSX-x86_64.sh -O miniconda.sh
-  chmod +x miniconda.sh
-  ./miniconda.sh -b
-  PATH=/Users/travis/miniconda3/bin:${PATH}
+if [ $TRAVIS_OS_NAME = 'linux' ]; then
+    # Install some custom requirements on Linux
+    case "${IDX}" in
+        cu102)
+            pip -q install torch torchvision torchaudio
+            ;;
+        
+        cu111 | cpu)
+            pip install -q torch==${TORCH_VERSION}+${IDX} torchvision==${TORCHVISION_VERSION}+${IDX} torchaudio==0.8.0 -f https://download.pytorch.org/whl/torch_stable.html
+            ;;
+
+        *)
+            # may fail
+            pip install -q torch==${TORCH_VERSION}+${IDX} torchvision==${TORCHVISION_VERSION}+${IDX} torchaudio==0.8.0 -f https://download.pytorch.org/whl/torch_stable.html
+            ;;
+    esac
 fi
 
+if [ $TRAVIS_OS_NAME = 'windows' ]; then
+    # Install some custom requirements on windows
+    case "${IDX}" in
+        cu102 | cu111 | cpu)
+            pip install -q torch==${TORCH_VERSION}+${IDX} torchvision==${TORCHVISION_VERSION}+${IDX} torchaudio==0.8.0 -f https://download.pytorch.org/whl/torch_stable.html
+            ;;
 
-if [ "${TRAVIS_OS_NAME}" = "windows" ]; then
-  choco install openssl.light
-  choco install miniconda3
-  PATH=/c/tools/miniconda3/Scripts:$PATH
-fi
-
-conda update --yes conda
-
-conda create --yes -n test python="${PYTHON_VERSION}"
-
-if [ "${TRAVIS_OS_NAME}" = "linux" ]; then
-  export TOOLKIT=cpuonly
-fi
-
-if [ "${TRAVIS_OS_NAME}" = "windows" ]; then
-  export TOOLKIT=cpuonly
-  export PYTHONHTTPSVERIFY=0
-fi
-
-if [ "${TRAVIS_OS_NAME}" = "osx" ]; then
-  export TOOLKIT=""
+        *)
+            # may fail
+            pip install -q torch==${TORCH_VERSION}+${IDX} torchvision==${TORCHVISION_VERSION}+${IDX} torchaudio==0.8.0 -f https://download.pytorch.org/whl/torch_stable.html
+            ;;
+    esac
 fi
