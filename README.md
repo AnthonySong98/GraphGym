@@ -1,67 +1,7 @@
 # GraphGym
+[![Build Status](https://travis-ci.com/AnthonySong98/GraphGym.svg?branch=master)](https://travis-ci.com/AnthonySong98/GraphGym)
+
 GraphGym is a platform for designing and evaluating Graph Neural Networks (GNN).
-### Highlights
-**1. Highly modularized pipeline for GNN**
-- **Data:** Data loading, data splitting
-- **Model:** Modularized GNN implementation
-- **Tasks:** Node / edge / graph level GNN tasks
-- **Evaluation:** Accuracy, ROC AUC, ...
-
-**2. Reproducible experiment configuration** 
-- Each experiment is *fully described by a configuration file*
-
-**3. Scalable experiment management**
-- Easily launch *thousands of GNN experiments in parallel* 
-- *Auto-generate* experiment analyses and figures across random seeds and experiments.
-
-**4. Flexible user customization**
-- Easily *register your own modules* in [`graphgym/contrib/`](graphgym/contrib), such as data loaders, GNN layers, loss functions, etc. 
-
-## Why GraphGym?
-**TL;DR:** GraphGym is great for GNN beginners, domain experts and GNN researchers.
-
-**Scenario 1:** You are a beginner to GNN, who wants to understand how GNN works.
-
-You probably have read many exciting papers on GNN, and try to write your own GNN implementation.
-Using existing packages for GNN, you still have to code up the essential pipeline on your own.
-GraphGym is a perfect place for your to start learning *standardized GNN implementation and evaluation*.
-
-<div align="center">
-  <img align="center" src="docs/design_space.png" width="400px" />
-  <figcaption><b><br>Figure 1: Modularized GNN implementation.</b></figcaption>
-</div>
-
-<br>
-
-**Scenario 2:** You want to apply GNN to your exciting applications.
-
-You probably know that there are hundreds of possible GNN models, and selecting the best model is notoriously hard.
-Even worse, we have shown in our [paper](https://arxiv.org/abs/2011.08843) that the best GNN designs for different tasks differ drastically.
-GraphGym provides a *simple interface to try out thousands of GNNs in parallel* and understand the best designs for your specific task.
-GraphGym also recommends a "go-to" GNN design space, after investigating 10 million GNN model-task combinations.
-
-<div align="center">
-  <img align="center" src="docs/rank.png" width="1000px" />
-  <figcaption><b><br>Figure 2: A guideline for desirable GNN design choices. <br>(Sampling from 10 million GNN model-task combinations.) </b></figcaption>
-</div>
-
-<br>
-
-
-**Scenario 3:** You are a GNN researcher, who want to innovate GNN models / propose new GNN tasks.
-
-Say you have proposed a new GNN layer `ExampleConv`.
-GraphGym can help you convincingly argue that `ExampleConv` is better than say `GCNConv`:
-when randomly sample from 10 millions possible model-task combinations, how often `ExampleConv` will outperform `GCNConv`, when everything else is fixed (including the computational cost). 
-Moreover, GraphGym can help you easily do hyper-parameter search, and *visualize* what design choices are better.
-In sum, GraphGym can greatly facilitate your GNN research.
-
-<div align="center">
-  <img align="center" src="docs/evaluation.png" width="1000px" />
-  <figcaption><b><br>Figure 3: Evaluation of a given GNN design dimension (BatchNorm here).</b></figcaption>
-</div>
-
-<br>
 
 ## Installation
 
@@ -258,72 +198,65 @@ Additionally, we have provided examples on how to transform [PyG](https://pytorc
 Further details on the data representation is described in [DeepSNAP documentation](https://snap.stanford.edu/deepsnap/notes/introduction.html#graph-in-deepsnap).
 
 
+### Highlights
+**1. Highly modularized pipeline for GNN**
+- **Data:** Data loading, data splitting
+- **Model:** Modularized GNN implementation
+- **Tasks:** Node / edge / graph level GNN tasks
+- **Evaluation:** Accuracy, ROC AUC, ...
 
-## Use case: Design Space for Graph Neural Networks (NeurIPS 2020 Spotlight)
+**2. Reproducible experiment configuration** 
+- Each experiment is *fully described by a configuration file*
 
-Reproducing experiments in *[Design Space for Graph Neural Networks](https://arxiv.org/abs/2011.08843)*, Jiaxuan You, Rex Ying, Jure Leskovec, **NeurIPS 2020 Spotlight**.
-You may refer to the [paper](https://arxiv.org/abs/2011.08843) or [project webpage](http://snap.stanford.edu/gnn-design/) for more details. 
+**3. Scalable experiment management**
+- Easily launch *thousands of GNN experiments in parallel* 
+- *Auto-generate* experiment analyses and figures across random seeds and experiments.
 
-```bash
-# NOTE: We include the raw results with GraphGym
-# If you run the following code, the results will be overridden.
-cd run
-bash run_design_round1.sh   # first round experiments, on a design space of 315K GNN designs
-bash run_design_round2.sh   # second round experiments, on a design space of 96 GNN designs
-cd ../analysis
-jupyter notebook
-design_space.ipynb   # reproducing all the analyses in the paper
-```
+**4. Flexible user customization**
+- Easily *register your own modules* in [`graphgym/contrib/`](graphgym/contrib), such as data loaders, GNN layers, loss functions, etc. 
 
-<div align="center">
-  <img align="center" src="docs/overview.png" width="900px" />
-  <figcaption><b><br>Figure 4: Overview of the proposed GNN design space and task space.</b></figcaption>
-</div>
+## Why GraphGym?
+**TL;DR:** GraphGym is great for GNN beginners, domain experts and GNN researchers.
 
+**Scenario 1:** You are a beginner to GNN, who wants to understand how GNN works.
 
-
-
-## Use case: Identity-aware Graph Neural Networks (AAAI 2021)
-
-Reproducing experiments in *[Identity-aware Graph Neural Networks](https://arxiv.org/abs/2101.10320)*, Jiaxuan You, Jonathan Gomes-Selman, Rex Ying, Jure Leskovec, **AAAI 2021**.
-You may refer to the [paper](https://arxiv.org/abs/2101.10320) or [project webpage](http://snap.stanford.edu/idgnn/) for more details. 
-
-```bash
-# NOTE: We include the raw results for ID-GNN in analysis/idgnn.csv
-cd run
-bash run_idgnn_node.sh   # Reproduce ID-GNN node-level results
-bash run_idgnn_edge.sh   # Reproduce ID-GNN edge-level results
-bash run_idgnn_graph.sh   # Reproduce ID-GNN graph-level results
-```
+You probably have read many exciting papers on GNN, and try to write your own GNN implementation.
+Using existing packages for GNN, you still have to code up the essential pipeline on your own.
+GraphGym is a perfect place for your to start learning *standardized GNN implementation and evaluation*.
 
 <div align="center">
-  <img align="center" src="docs/IDGNN.png" width="900px" />
-  <figcaption><b><br>Figure 5: Overview of Identity-aware Graph Neural Networks (ID-GNN).</b></figcaption>
+  <img align="center" src="docs/design_space.png" width="400px" />
+  <figcaption><b><br>Figure 1: Modularized GNN implementation.</b></figcaption>
 </div>
 
+<br>
 
-## Contributors
-[Jiaxuan You](https://cs.stanford.edu/~jiaxuan/) initiates the project and majorly contributes to the entire GraphGym platform. 
-[Rex Ying](https://cs.stanford.edu/people/rexy/) contributes to the feature augmentation modules.
-Jonathan Gomes Selman enables GraphGym to have OGB support.
+**Scenario 2:** You want to apply GNN to your exciting applications.
 
-GraphGym is inspired by the framework of [pycls](https://github.com/facebookresearch/pycls). 
-GraphGym adopt [DeepSNAP](https://github.com/snap-stanford/deepsnap) as the data representation, which is a Python library that assists efficient deep learning on graphs.
-Part of GraphGym relies on [Pytorch Geometric](https://github.com/rusty1s/pytorch_geometric) functionalities.
+You probably know that there are hundreds of possible GNN models, and selecting the best model is notoriously hard.
+Even worse, we have shown in our [paper](https://arxiv.org/abs/2011.08843) that the best GNN designs for different tasks differ drastically.
+GraphGym provides a *simple interface to try out thousands of GNNs in parallel* and understand the best designs for your specific task.
+GraphGym also recommends a "go-to" GNN design space, after investigating 10 million GNN model-task combinations.
 
-## Contributing
+<div align="center">
+  <img align="center" src="docs/rank.png" width="1000px" />
+  <figcaption><b><br>Figure 2: A guideline for desirable GNN design choices. <br>(Sampling from 10 million GNN model-task combinations.) </b></figcaption>
+</div>
 
-We warmly welcome the community to contribute to GraphGym.
-GraphGym is particularly designed to enable contribution / customization in a simple way. 
-For example, you may contribute your modules to [`graphgym/contrib/`](graphgym/contrib/) by creating pull requests.
+<br>
 
-## Citing our paper
-If you find GraphGym or our paper useful, please cite our paper:
-```
-@InProceedings{you2020design,
-  title = {Design Space for Graph Neural Networks},
-  author = {You, Jiaxuan and Ying, Rex and Leskovec, Jure},
-  booktitle = {NeurIPS},
-  year = {2020}
-}
-```
+
+**Scenario 3:** You are a GNN researcher, who want to innovate GNN models / propose new GNN tasks.
+
+Say you have proposed a new GNN layer `ExampleConv`.
+GraphGym can help you convincingly argue that `ExampleConv` is better than say `GCNConv`:
+when randomly sample from 10 millions possible model-task combinations, how often `ExampleConv` will outperform `GCNConv`, when everything else is fixed (including the computational cost). 
+Moreover, GraphGym can help you easily do hyper-parameter search, and *visualize* what design choices are better.
+In sum, GraphGym can greatly facilitate your GNN research.
+
+<div align="center">
+  <img align="center" src="docs/evaluation.png" width="1000px" />
+  <figcaption><b><br>Figure 3: Evaluation of a given GNN design dimension (BatchNorm here).</b></figcaption>
+</div>
+
+<br>
