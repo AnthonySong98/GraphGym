@@ -32,6 +32,7 @@ install:
   - pip install -q -r requirements.txt
   # Install the codecov pip dependency
   - pip install -q pytest-cov
+  - pip install --user codecov
 
 # Build GraphGym
 script: 

@@ -1,5 +1,6 @@
 # GraphGym
 [![Build Status](https://travis-ci.com/AnthonySong98/GraphGym.svg?branch=master)](https://travis-ci.com/AnthonySong98/GraphGym)
+[![codecov](https://codecov.io/gh/AnthonySong98/GraphGym/branch/master/graph/badge.svg?token=1NTFG42LTL)](https://codecov.io/gh/AnthonySong98/GraphGym)
 
 GraphGym is a platform for designing and evaluating Graph Neural Networks (GNN).
 
