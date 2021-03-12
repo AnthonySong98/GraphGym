@@ -31,7 +31,20 @@ install:
   - pip install -q torch-geometric
   - pip install -q -r requirements.txt
 
+# Build GraphGym
 script: python setup.py develop
+
+# Install the codecov pip dependency
+install:
+  - pip install -q pytest-cov
+
+# Run the unit test
+script:
+  - pytest --cov=./
+
+# Push the results back to codecov
+after_success:
+  - codecov
 
 notifications:
   email: false
