@@ -10,7 +10,7 @@ env:
     - TORCH_VERSION=1.7.0 TORCHVISION_VERSION=0.8.1 PYTHON_VERSION=3.6 IDX=cpu
 
 install:
-  - ./.travis/install.sh
+  - source ./.travis/install.sh
   - conda create --yes -n test python="${PYTHON_VERSION}"
   - source activate test
   - conda install pytorch==${TORCH_VERSION} torchvision==${TORCHVISION_VERSION} ${TOOLKIT} -c pytorch -c conda-forge --yes
