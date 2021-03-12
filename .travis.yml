@@ -30,16 +30,14 @@ install:
   - pip install -q torch-spline-conv -f https://pytorch-geometric.com/whl/torch-${TORCH_VERSION}+${IDX}.html
   - pip install -q torch-geometric
   - pip install -q -r requirements.txt
-
-# Build GraphGym
-script: python setup.py develop
-
-# Install the codecov pip dependency
-install:
+  # Install the codecov pip dependency
   - pip install -q pytest-cov
 
-# Run the unit test
-script:
+# Build GraphGym
+script: 
+  # Build GraphGym
+  - python setup.py develop
+  # Run the unit test
   - pytest --cov=./
 
 # Push the results back to codecov
